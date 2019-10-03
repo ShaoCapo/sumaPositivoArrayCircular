@@ -1,21 +1,17 @@
 public class Principal {
 
+    // no entiendo si esta funcion leeria cada for la mitad del vector...
     public static int maxSubArray(int[] vector, int i0, int k, int iN){
-        int max = Integer.MIN_VALUE; int suma = 0;
+        int suma = 0;
         for (int i = k; i >= i0; i--) {
-            suma += vector[i];
-            if (suma > max) {
-                max = suma;
-            }
+            if(vector[i] >= 0)
+                suma += vector[i];
         }
-        suma=max;
         for (int j = k+1; j <= iN; j++) {
-            suma += vector[j];
-            if (suma > max) {
-                max = suma;
-            }
+            if(vector[j] >= 0)
+                suma += vector[j];
         }
-        return max;
+        return suma;
     }
 
     /**
@@ -25,9 +21,8 @@ public class Principal {
      * @param iN ultimo elemento a sumar
      * @return
      */
-    // {-15, -12, -10, -7, -3, -2, -2, 0, 1, -19, -15, -15} => i0 = 0 ; iN = 11
     public static int sumaPositivos1Aux(int[] vector, int i0, int iN){
-        // si el siguiente número es negativo, paramos
+        // si el vector solo tiene un valor
         if(i0 == iN)
             return vector[i0];
         else {
@@ -47,8 +42,9 @@ public class Principal {
      * @param vector
      * @return
      */
-     public static int sumaPositivos1(int[] vector){
-         return sumaPositivos1Aux(vector, 0, vector.length - 1);
+    public static int sumaPositivos1(int[] vector){
+        // llamada a la funcion auxiliar que usará el algoritmo Divide y Vencerás
+        return sumaPositivos1Aux(vector, 0, vector.length - 1);
     }
 
     /**
