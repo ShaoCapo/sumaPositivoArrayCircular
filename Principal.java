@@ -1,19 +1,5 @@
 public class Principal {
 
-    // no entiendo si esta funcion leeria cada for la mitad del vector...
-    public static int maxSubArray(int[] vector, int i0, int k, int iN){
-        int suma = 0;
-        for (int i = k; i >= i0; i--) {
-            if(vector[i] >= 0)
-                suma += vector[i];
-        }
-        for (int j = k+1; j <= iN; j++) {
-            if(vector[j] >= 0)
-                suma += vector[j];
-        }
-        return suma;
-    }
-
     /**
      * Funcion auxiliar para divide y vencerás
      * @param vector
@@ -23,17 +9,17 @@ public class Principal {
      */
     public static int sumaPositivos1Aux(int[] vector, int i0, int iN){
         // si el vector solo tiene un valor
-        if(i0 == iN)
-            return vector[i0];
+        if(i0 == iN){
+            if(vector[i0] >= 0)
+                return vector[i0];
+            else
+                return 0;
+        }
         else {
             // DIVIDIR
             int k = (i0 + iN) / 2;
             // CONQUISTAR
-            int m1 = sumaPositivos1Aux(vector, i0, k);
-            int m2 = sumaPositivos1Aux(vector, k + 1, iN);
-            //COMBINAR
-            int m3 = maxSubArray(vector, i0, k, iN);
-            return Math.max(m1, Math.max(m2, m3));
+            return sumaPositivos1Aux(vector, i0, k) + sumaPositivos1Aux(vector, k + 1, iN);
         }
     }
 
