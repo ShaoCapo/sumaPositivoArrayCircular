@@ -10,6 +10,7 @@ public class Principal {
     public static int sumaPositivos1Aux(int[] vector, int i0, int iN){
         // si el vector solo tiene un valor
         if(i0 == iN){
+            // el valor es positivo
             if(vector[i0] >= 0)
                 return vector[i0];
             else
@@ -18,7 +19,6 @@ public class Principal {
         else {
             // DIVIDIR
             int k = (i0 + iN) / 2;
-            // CONQUISTAR
             return sumaPositivos1Aux(vector, i0, k) + sumaPositivos1Aux(vector, k + 1, iN);
         }
     }
